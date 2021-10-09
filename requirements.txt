@@ -1,3 +1,2 @@
-vk.api
-vk
-json
+vk.api == 11.9.4
+vk == 2.0.2
