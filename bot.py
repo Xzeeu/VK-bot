@@ -1,6 +1,7 @@
 import vk_api, vk
 import json
 from datetime import datetime
+from vk_api import keyboard
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 from vk_api.utils import get_random_id
 from vk_api.longpoll import VkLongPoll, VkEventType
@@ -11,6 +12,8 @@ from vkbot.bin.settings import*
 from vkbot.du.timelessons import*
 from vkbot.bin.keyboard import*
 
+error = False
+error_el = ''
 
 for event in longpoll.listen():
     if event.type == VkBotEventType.MESSAGE_NEW:
@@ -25,18 +28,27 @@ for event in longpoll.listen():
                         random_id=get_random_id(),
                         peer_id=event.obj.message['from_id'],
                         keyboard=keyboard_1.get_keyboard(),
-                        message= 'Привет!😊) Если ты не определился чем хочешь заниматься в будущем🤷‍♂️, куда поступать👩‍🎓, то этот бот тебе поможет!'
+                        message= 'Привет!😊)'
                 )
 
         if event.obj.message['text'] == 'Секреты':
-            if event.from_user:
-                vk_.messages.send(
-                        user_id=event.obj.message['from_id'],
-                        random_id=get_random_id(),
-                        peer_id=event.obj.message['from_id'],
-                        keyboard=keyboard_1.get_keyboard(),
-                        message= error_el
-                )
+            if error_el != '':
+                if event.from_user:
+                    vk_.messages.send(
+                            user_id=event.obj.message['from_id'],
+                            random_id=get_random_id(),
+                            peer_id=event.obj.message['from_id'],
+                            keyboard=keyboard_4.get_keyboard(),
+                            message= error_el
+                    )
+            else:
+                if event.from_user:
+                    vk_.messages.send(
+                            user_id=event.obj.message['from_id'],
+                            random_id=get_random_id(),
+                            peer_id=event.obj.message['from_id'],
+                            message= 'Сообщений об ошибках нет.'
+                    )
 
     if error == True:
         if event.obj.message != None:
@@ -59,15 +71,35 @@ for event in longpoll.listen():
                         user_id=event.object.user_id,
                         random_id=get_random_id(),
                         peer_id=event.object.peer_id,
-                        message= 'Опишите ошибку в следующем сообщении'
+                        message= 'Пожалуйста, опишите ошибку в следующем сообщении.'
                 )
             error = True
+
+        elif event.object.payload.get('type') == 'error_del':
+            error_el = ''
+
+        elif event.object.payload.get('type') == 'dz':
+            last_id = vk_.messages.send(
+                        user_id=event.object.user_id,
+                        random_id=get_random_id(),
+                        peer_id=event.object.peer_id,
+                        message= 'Домашнее задание',
+                        keyboard=keyboard_3.get_keyboard()
+                )
+        elif event.object.payload.get('type') == '+dz':
+            last_id = vk_.messages.send(
+                        user_id=event.object.user_id,
+                        random_id=get_random_id(),
+                        peer_id=event.object.peer_id,
+                        message= 'На данный момент функционал не реализован.'
+                )
             
 
 
         elif event.object.payload.get('type') == 'callback':
 
             now  = datetime.now()
+
             k = 0
 
 
@@ -146,14 +178,24 @@ for event in longpoll.listen():
             for i in dku_0:
                 if i != '(' and i != "'" and i != ',' and i != ')':
                     dku += i
-        
-            last_id = vk_.messages.send(
+
+            if k == 0:
+                last_id = vk_.messages.send(
                         user_id=event.object.user_id,
                         random_id=get_random_id(),
                         peer_id=event.object.peer_id,
-                        message= dku
+                        message= 'Уроков нет'
                 )
-            f_toggle = not f_toggle
+                f_toggle = not f_toggle
+
+            else:
+                last_id = vk_.messages.send(
+                            user_id=event.object.user_id,
+                            random_id=get_random_id(),
+                            peer_id=event.object.peer_id,
+                            message= dku
+                    )
+                f_toggle = not f_toggle
 
 if __name__ == '__main__':
     print()
