@@ -58,12 +58,12 @@ for event in longpoll.listen():
                         message= 'Привет!😊) Если ты не определился чем хочешь заниматься в будущем🤷‍♂️, куда поступать👩‍🎓, то этот бот тебе поможет!'
                 )
 
-    if error == True:
-        if event.obj.message != None:
-            with open("error.txt", "a") as f:
-                f.writelines(str(event.obj.message) + '\n')
-            #print(event.obj.message)
-            error = False
+#    if error == True:
+#        if event.obj.message != None:
+#            with open("error.txt", "a") as f:
+#                f.writelines(str(event.obj.message) + '\n')
+#            #print(event.obj.message)
+#            error = False
 
     
 
