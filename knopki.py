@@ -4,6 +4,8 @@ from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 import json
 from datetime import datetime
+from rasp import*
+import time
 
 now  = datetime.now()
 
@@ -19,15 +21,17 @@ longpoll = VkBotLongPoll(vk_session, group_id=GROUP_ID)
 
 settings = dict(one_time=False, inline=False)
 
+error = False
+
 keyboard_1 = VkKeyboard(**settings)
-keyboard_1.add_callback_button(label='Расписание уроков', color=VkKeyboardColor.SECONDARY, payload={"type": "callback"})
+keyboard_1.add_callback_button(label='Время до конца урока', color=VkKeyboardColor.SECONDARY, payload={"type": "callback"})
 keyboard_1.add_line()
 keyboard_1.add_callback_button(label='Хороший сайт, там вузы есть', color=VkKeyboardColor.POSITIVE, payload={"type": "open_link", "link": "https://postupi.online/"})
 keyboard_1.add_line()
 
 
 
-keyboard_1.add_callback_button(label='ещё одно меню если надо будет', color=VkKeyboardColor.NEGATIVE, payload={"type": "my_own_100500_type_edit"})
+keyboard_1.add_callback_button(label='Сообщить об ошибке', color=VkKeyboardColor.NEGATIVE, payload={"type": "error"})
 keyboard_2 = VkKeyboard(**settings)
 keyboard_2.add_callback_button('Назад', color=VkKeyboardColor.NEGATIVE, payload={"type": "my_own_100500_type_edit"})
 
@@ -40,11 +44,12 @@ f_toggle: bool = False
 
 for event in longpoll.listen():
     if event.type == VkBotEventType.MESSAGE_NEW:
+        
         if event.obj.message['text'] == 'Начать':
             if event.from_user:
                 if 'callback' not in event.obj.client_info['button_actions']:
                     print(f'Клиент {event.obj.message["from_id"]} не поддерж. callback')
-
+        
                 vk.messages.send(
                         user_id=event.obj.message['from_id'],
                         random_id=get_random_id(),
@@ -52,6 +57,15 @@ for event in longpoll.listen():
                         keyboard=keyboard_1.get_keyboard(),
                         message= 'Привет!😊) Если ты не определился чем хочешь заниматься в будущем🤷‍♂️, куда поступать👩‍🎓, то этот бот тебе поможет!'
                 )
+
+    if error == True:
+        if event.obj.message != None:
+            with open("error.txt", "a") as f:
+                f.writelines(str(event.obj.message) + '\n')
+            print(event.obj.message)
+            error = False
+
+    
 
     elif event.type == VkBotEventType.MESSAGE_EVENT:
         if event.object.payload.get('type') in CALLBACK_TYPES:
@@ -61,7 +75,15 @@ for event in longpoll.listen():
                       peer_id=event.object.peer_id,                                                   
                       event_data=json.dumps(event.object.payload))
 
-
+        elif event.object.payload.get('type') == 'error':
+            last_id = vk.messages.send(
+                        user_id=event.object.user_id,
+                        random_id=get_random_id(),
+                        peer_id=event.object.peer_id,
+                        message= 'Опишите ошибку в следующем сообщении'
+                )
+            error = True
+            
 
 
         elif event.object.payload.get('type') == 'callback':
@@ -69,7 +91,7 @@ for event in longpoll.listen():
                         user_id=event.object.user_id,
                         random_id=get_random_id(),
                         peer_id=event.object.peer_id,
-                        message= now
+                        message= dku
                 )
             f_toggle = not f_toggle
 
