@@ -1,4 +1,4 @@
-from datetime import datetime
+'''from datetime import datetime
 from timelessons import*
 import time
 from knopki import now
@@ -83,3 +83,4 @@ for i in dku_0:
         dku += i
 
 
+'''
