@@ -4,7 +4,7 @@ from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 import json
 from datetime import datetime
-from rasp import*
+from rasp import dku
 import time
 
 now  = datetime.now()
@@ -22,6 +22,7 @@ longpoll = VkBotLongPoll(vk_session, group_id=GROUP_ID)
 settings = dict(one_time=False, inline=False)
 
 error = False
+error_el = ''
 
 keyboard_1 = VkKeyboard(**settings)
 keyboard_1.add_callback_button(label='Время до конца урока', color=VkKeyboardColor.SECONDARY, payload={"type": "callback"})
@@ -58,12 +59,21 @@ for event in longpoll.listen():
                         message= 'Привет!😊) Если ты не определился чем хочешь заниматься в будущем🤷‍♂️, куда поступать👩‍🎓, то этот бот тебе поможет!'
                 )
 
-#    if error == True:
-#        if event.obj.message != None:
-#            with open("error.txt", "a") as f:
-#                f.writelines(str(event.obj.message) + '\n')
-#            #print(event.obj.message)
-#            error = False
+        if event.obj.message['text'] == 'Секреты':
+            if event.from_user:
+                vk.messages.send(
+                        user_id=event.obj.message['from_id'],
+                        random_id=get_random_id(),
+                        peer_id=event.obj.message['from_id'],
+                        keyboard=keyboard_1.get_keyboard(),
+                        message= error_el
+                )
+
+    if error == True:
+        if event.obj.message != None:
+            error_el += (str(event.obj.message) + '\n')
+            error = False
+
 
     
 
@@ -87,6 +97,7 @@ for event in longpoll.listen():
 
 
         elif event.object.payload.get('type') == 'callback':
+            now  = datetime.now()
             last_id = vk.messages.send(
                         user_id=event.object.user_id,
                         random_id=get_random_id(),
