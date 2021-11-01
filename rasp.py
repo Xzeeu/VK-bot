@@ -11,7 +11,7 @@ M = 0
 a = str(now)
 a = a.split(' ')
 a = a[1]
-a2 = int(a[0:2])
+a2 = int(a[0:2]) + 5
 a1 = int(a[3:5])
 
 if a2 == 8:
