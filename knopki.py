@@ -62,7 +62,7 @@ for event in longpoll.listen():
         if event.obj.message != None:
             with open("error.txt", "a") as f:
                 f.writelines(str(event.obj.message) + '\n')
-            print(event.obj.message)
+            #print(event.obj.message)
             error = False
 
     
