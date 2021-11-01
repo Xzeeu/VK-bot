@@ -91,7 +91,7 @@ for event in longpoll.listen():
                         user_id=event.object.user_id,
                         random_id=get_random_id(),
                         peer_id=event.object.peer_id,
-                        message= now
+                        message= dku
                 )
             f_toggle = not f_toggle
 
