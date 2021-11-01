@@ -1,9 +1,10 @@
 from datetime import datetime
 from timelessons import*
 import time
+from knopki import now
 
 k = 0
-now  = datetime.now()
+
 
 H = 0
 M = 0
