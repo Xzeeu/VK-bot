@@ -7,10 +7,9 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 
-
-from settings import*
-from du.timelessons import*
-from keyboard import*
+from vkbot.bin.settings import*
+from vkbot.du.timelessons import*
+from vkbot.bin.keyboard import*
 
 
 for event in longpoll.listen():
@@ -21,7 +20,7 @@ for event in longpoll.listen():
                 if 'callback' not in event.obj.client_info['button_actions']:
                     print(f'Клиент {event.obj.message["from_id"]} не поддерж. callback')
         
-                vk.messages.send(
+                vk_.messages.send(
                         user_id=event.obj.message['from_id'],
                         random_id=get_random_id(),
                         peer_id=event.obj.message['from_id'],
@@ -31,7 +30,7 @@ for event in longpoll.listen():
 
         if event.obj.message['text'] == 'Секреты':
             if event.from_user:
-                vk.messages.send(
+                vk_.messages.send(
                         user_id=event.obj.message['from_id'],
                         random_id=get_random_id(),
                         peer_id=event.obj.message['from_id'],
@@ -49,14 +48,14 @@ for event in longpoll.listen():
 
     elif event.type == VkBotEventType.MESSAGE_EVENT:
         if event.object.payload.get('type') in CALLBACK_TYPES:
-            r = vk.messages.sendMessageEventAnswer(
+            r = vk_.messages.sendMessageEventAnswer(
                       event_id=event.object.event_id,
                       user_id=event.object.user_id,
                       peer_id=event.object.peer_id,                                                   
                       event_data=json.dumps(event.object.payload))
 
         elif event.object.payload.get('type') == 'error':
-            last_id = vk.messages.send(
+            last_id = vk_.messages.send(
                         user_id=event.object.user_id,
                         random_id=get_random_id(),
                         peer_id=event.object.peer_id,
@@ -148,7 +147,7 @@ for event in longpoll.listen():
                 if i != '(' and i != "'" and i != ',' and i != ')':
                     dku += i
         
-            last_id = vk.messages.send(
+            last_id = vk_.messages.send(
                         user_id=event.object.user_id,
                         random_id=get_random_id(),
                         peer_id=event.object.peer_id,

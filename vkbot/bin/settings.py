@@ -15,5 +15,5 @@ API_VERSION = '5.120'
 CALLBACK_TYPES = ('show_snackbar', 'open_link', 'open_app')
 
 vk_session = VkApi(token=GROUP_TOKEN, api_version=API_VERSION)
-vk = vk_session.get_api()
+vk_ = vk_session.get_api()
 longpoll = VkBotLongPoll(vk_session, group_id=GROUP_ID)

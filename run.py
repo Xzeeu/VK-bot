@@ -1,1 +1,0 @@
-from vkbot.bin.bot import*
