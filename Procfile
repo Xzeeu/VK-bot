@@ -1,1 +1,1 @@
-worker: python knopki.py
+worker: python bot.py
