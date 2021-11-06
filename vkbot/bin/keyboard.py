@@ -29,4 +29,8 @@ keyboard_3.add_callback_button(label='Добавить', color=VkKeyboardColor.N
 keyboard_4 = VkKeyboard(**settings_2)
 keyboard_4.add_callback_button(label='Удалить', color=VkKeyboardColor.NEGATIVE, payload={"type": "error_del"})
 
+keyboard_5 = VkKeyboard(**settings_2)
+keyboard_5.add_callback_button(label='Добавить', color=VkKeyboardColor.NEGATIVE, payload={"type": "+dz"})
+keyboard_5.add_callback_button(label='Удалить', color=VkKeyboardColor.NEGATIVE, payload={"type": "DZ_del"})
+
 f_toggle: bool = False

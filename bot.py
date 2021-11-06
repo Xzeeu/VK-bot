@@ -13,7 +13,9 @@ from vkbot.du.timelessons import*
 from vkbot.bin.keyboard import*
 
 error = False
+DZ = False
 error_el = ''
+DZ_el = ''
 
 for event in longpoll.listen():
     if event.type == VkBotEventType.MESSAGE_NEW:
@@ -54,6 +56,11 @@ for event in longpoll.listen():
         if event.obj.message != None:
             error_el += (str(event.obj.message) + '\n')
             error = False
+    if DZ == True:
+        if event.obj.message != None:
+            event.obj.message = event.obj.message['text']
+            DZ_el += (str(event.obj.message) + '\n')
+            DZ = False
 
 
     
@@ -77,22 +84,35 @@ for event in longpoll.listen():
 
         elif event.object.payload.get('type') == 'error_del':
             error_el = ''
+        elif event.object.payload.get('type') == 'DZ_del':
+            DZ_el = ''
 
         elif event.object.payload.get('type') == 'dz':
-            last_id = vk_.messages.send(
-                        user_id=event.object.user_id,
-                        random_id=get_random_id(),
-                        peer_id=event.object.peer_id,
-                        message= 'Домашнее задание',
-                        keyboard=keyboard_3.get_keyboard()
-                )
+            if DZ_el == '':
+                last_id = vk_.messages.send(
+                            user_id=event.object.user_id,
+                            random_id=get_random_id(),
+                            peer_id=event.object.peer_id,
+                            message= 'Домашнее задание',
+                            keyboard=keyboard_3.get_keyboard()
+                    )
+            if DZ_el != '':
+                last_id = vk_.messages.send(
+                            user_id=event.object.user_id,
+                            random_id=get_random_id(),
+                            peer_id=event.object.peer_id,
+                            message= DZ_el,
+                            keyboard=keyboard_5.get_keyboard()
+                    )
+
         elif event.object.payload.get('type') == '+dz':
             last_id = vk_.messages.send(
                         user_id=event.object.user_id,
                         random_id=get_random_id(),
                         peer_id=event.object.peer_id,
-                        message= 'На данный момент функционал не реализован.'
+                        message= 'Пиши ДЗ.'
                 )
+            DZ = True
             
 
 
