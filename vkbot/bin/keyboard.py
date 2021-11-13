@@ -8,8 +8,6 @@ from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 settings = dict(one_time=False, inline=False)
 settings_2 = dict(one_time=False, inline=True)
 
-
-
 keyboard_1 = VkKeyboard(**settings)
 
 keyboard_1.add_callback_button(label='Время до конца урока', color=VkKeyboardColor.POSITIVE, payload={"type": "callback"})
