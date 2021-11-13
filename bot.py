@@ -7,23 +7,25 @@ from vk_api.utils import get_random_id
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
+from vkbot.bin.otcerror import del_error, o_error, ro_error, roo_error
 
 from vkbot.bin.settings import*
 from vkbot.resources.timelessons import*
 from vkbot.bin.keyboard import*
-from vkbot.bin.otcerror import o_error
+#from vkbot.bin.otcerror import o_error
 from vkbot.bin.timetable import tt
 from vkbot.bin.maindef import *
 
-error = False
+#error = False
 DZ = False
-error_el = ''
+#error_el = ''
 DZ_el = ''
 
 
 for event in longpoll.listen():
     if event.type == VkBotEventType.MESSAGE_NEW:
-        
+        roo_error(event)
+
         if event.obj.message['text'] == 'Начать':
             if event.from_user:
                 if 'callback' not in event.obj.client_info['button_actions']:
@@ -32,19 +34,22 @@ for event in longpoll.listen():
                 new_m_send(event, keyboard_1.get_keyboard(), 'Привет')
 
         if event.obj.message['text'] == 'Секреты':
-            if error_el != '':
+            o_error(event)
+        
+
+            '''if error_el != '':
                 if event.from_user:
                     new_m_send(event, keyboard_4.get_keyboard(), error_el)
                     
             else:
                 if event.from_user:
-                    new_m_send(event, None, 'Сообщений об ошибках нет.')
+                    new_m_send(event, None, 'Сообщений об ошибках нет.')'''
 
 
-    if error == True:
+    '''if error == True:
         if event.obj.message != None:
             error_el += (str(event.obj.message) + '\n')
-            error = False
+            error = False'''
     if DZ == True:
         if event.obj.message != None:
             event.obj.message = event.obj.message['text']
@@ -61,14 +66,17 @@ for event in longpoll.listen():
                       user_id=event.object.user_id,
                       peer_id=event.object.peer_id,                                                   
                       event_data=json.dumps(event.object.payload))
-
+        #o_error(event)
         elif event.object.payload.get('type') == 'error':
-            event_m_send(event, None, 'Пожалуйста, опишите ошибку в следующем сообщении.')
-            error = True
+            ro_error(event)
+        
+            '''event_m_send(event, None, 'Пожалуйста, опишите ошибку в следующем сообщении.')
+            error = True'''
 
         elif event.object.payload.get('type') == 'error_del':
-            error_el = ''
-        elif event.object.payload.get('type') == 'DZ_del':
+            del_error(event)
+
+        if event.object.payload.get('type') == 'DZ_del':
             DZ_el = ''
 
         elif event.object.payload.get('type') == 'dz':
