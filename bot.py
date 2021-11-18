@@ -15,6 +15,7 @@ from vkbot.bin.keyboard import*
 #from vkbot.bin.otcerror import o_error
 from vkbot.bin.timetable import tt
 from vkbot.bin.maindef import *
+from vkbot.bin.rasp import *
 
 #error = False
 DZ = False
@@ -37,19 +38,6 @@ for event in longpoll.listen():
             o_error(event)
         
 
-            '''if error_el != '':
-                if event.from_user:
-                    new_m_send(event, keyboard_4.get_keyboard(), error_el)
-                    
-            else:
-                if event.from_user:
-                    new_m_send(event, None, 'Сообщений об ошибках нет.')'''
-
-
-    '''if error == True:
-        if event.obj.message != None:
-            error_el += (str(event.obj.message) + '\n')
-            error = False'''
     if DZ == True:
         if event.obj.message != None:
             event.obj.message = event.obj.message['text']
@@ -75,11 +63,24 @@ for event in longpoll.listen():
 
         elif event.object.payload.get('type') == 'error_del':
             del_error(event)
+#расписание
+        elif event.object.payload.get('type') == 'rasp':
+            rasp(event)
+        elif event.object.payload.get('type') == 'r_today':
+            r_today(event)
+        elif event.object.payload.get('type') == 'r_tomorrow':
+            r_tomorrow(event)
+        elif event.object.payload.get('type') == 'r_poln':
+            r_poln(event)
+        elif event.object.payload.get('type') == 'r_nazad':
+            event_m_send(event, keyboard_1.get_keyboard(), ':)')
+        
 
         if event.object.payload.get('type') == 'DZ_del':
             DZ_el = ''
 
         elif event.object.payload.get('type') == 'dz':
+            event_m_send(event, keyboard_1.get_keyboard(), ':)')
             if DZ_el == '':
                 event_m_send(event, keyboard_3.get_keyboard(), 'Домашнее задание')
 
