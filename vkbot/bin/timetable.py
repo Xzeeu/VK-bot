@@ -86,8 +86,25 @@ def tt(event):
             duration = str(duration)
             x = duration.split(',')
             x1 = x[1].split(':')
-            x = int(x1[1])
+            '''x = int(x1[1])
             dku_0 = ('До конца', k, 'урока осталось', x, 'минут')
+            dku_0 = str(dku_0)
+            dku = ''
+            for i in dku_0:
+                if i != '(' and i != "'" and i != ',' and i != ')':
+                    dku += i'''
+            x = int(x1[1])
+
+            #влад молодец
+            v223 = x
+            if v223 != 11 and v223 % 10 == 1:
+                v224 = 'минута'
+            elif 4 < v223 < 21 or 5 <= v223 % 10 <= 9:
+                v224 = 'минут'
+            elif 2<= v223 % 10 <= 4 and 12 != v223 and 13 != v223 and 14 != v223:
+                v224 = 'минуты'
+            ###
+            dku_0 = ('До конца', k, 'урока осталось', x, v224)
             dku_0 = str(dku_0)
             dku = ''
             for i in dku_0:
