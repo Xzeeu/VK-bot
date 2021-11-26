@@ -117,7 +117,7 @@ def tt(event):
                         random_id=get_random_id(),
                         peer_id=event.object.peer_id,
                         keyboard = keyboard_1.get_keyboard(),
-                        message= 'Уроков нет'
+                        message= 'Минут пять, десять пятого, четёре, пять пятого, УТРА'
                 )
                 #f_toggle = not f_toggle
 
