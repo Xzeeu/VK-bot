@@ -20,14 +20,14 @@ from vkbot.bin.rasp import *
 #error = False
 DZ = False
 #error_el = ''
-DZ_el = ''
+DZ_el = 't'
 
 
 for event in longpoll.listen():
     if event.type == VkBotEventType.MESSAGE_NEW:
         roo_error(event)
 
-        if event.obj.message['text'] == 'Начать':
+        if event.obj.message['text'] != 'Секреты' and DZ != True:
             if event.from_user:
                 if 'callback' not in event.obj.client_info['button_actions']:
                     print(f'Клиент {event.obj.message["from_id"]} не поддерж. callback')
@@ -41,7 +41,10 @@ for event in longpoll.listen():
     if DZ == True:
         if event.obj.message != None:
             event.obj.message = event.obj.message['text']
-            DZ_el += (str(event.obj.message) + '\n')
+            f = open('text.txt', 'a')
+            f.write(str(event.obj.message) + '\n')
+            f.close()
+            #DZ_el += (str(event.obj.message) + '\n')
             DZ = False
 
 
@@ -77,7 +80,10 @@ for event in longpoll.listen():
         
 
         if event.object.payload.get('type') == 'DZ_del':
-            DZ_el = ''
+            f = open('text.txt', 'w')
+            f.write('str(event.obj.message)' + '\n')
+            f.close()
+            #DZ_el = ''
 
         elif event.object.payload.get('type') == 'dz':
             event_m_send(event, keyboard_1.get_keyboard(), ':)')
@@ -85,6 +91,8 @@ for event in longpoll.listen():
                 event_m_send(event, keyboard_3.get_keyboard(), 'Домашнее задание')
 
             if DZ_el != '':
+                f = open('text.txt')
+                DZ_el = f.read()
                 event_m_send(event, keyboard_5.get_keyboard(), DZ_el)
 
 
