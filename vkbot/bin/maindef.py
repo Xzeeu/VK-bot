@@ -20,3 +20,12 @@ def event_m_send(event, keyboard, message):
                         keyboard = keyboard,
                         message= message
                 )
+
+def last_m_send(event, keyboard, message):
+    last_id = vk_.messages.send(
+                        user_id=event.object.user_id,
+                        random_id=get_random_id(),
+                        peer_id=event.object.peer_id,
+                        keyboard = keyboard,
+                        message = message
+                )

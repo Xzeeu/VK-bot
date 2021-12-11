@@ -16,6 +16,7 @@ from vkbot.bin.keyboard import*
 from vkbot.bin.timetable import tt
 from vkbot.bin.maindef import *
 from vkbot.bin.rasp import *
+from vkbot.bin.test import *
 
 #error = False
 DZ = False
@@ -24,10 +25,13 @@ DZ_el = 't'
 
 
 for event in longpoll.listen():
+    
+    aproftest(event)
+
     if event.type == VkBotEventType.MESSAGE_NEW:
         roo_error(event)
 
-        if event.obj.message['text'] != 'Секреты' and DZ != True:
+        if event.obj.message['text'] != 'Секреты' and DZ != True and event.obj.message['text'] != 'pt':
             if event.from_user:
                 if 'callback' not in event.obj.client_info['button_actions']:
                     print(f'Клиент {event.obj.message["from_id"]} не поддерж. callback')
@@ -66,6 +70,10 @@ for event in longpoll.listen():
 
         elif event.object.payload.get('type') == 'error_del':
             del_error(event)
+
+        elif event.object.payload.get('type') == 'proftest':
+                    proftest(event)
+        
 #расписание
         elif event.object.payload.get('type') == 'rasp':
             rasp(event)

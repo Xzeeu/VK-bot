@@ -10,6 +10,8 @@ settings_2 = dict(one_time=False, inline=True)
 
 keyboard_1 = VkKeyboard(**settings)
 
+keyboard_1.add_callback_button(label='Куда поступать?', color=VkKeyboardColor.POSITIVE, payload={"type": "proftest"})
+keyboard_1.add_line()
 keyboard_1.add_callback_button(label='🕑 Время до конца урока', color=VkKeyboardColor.POSITIVE, payload={"type": "callback"})
 #keyboard_1.add_line()
 keyboard_1.add_callback_button(label='👧🏿 Расписание уроков', color=VkKeyboardColor.POSITIVE, payload={"type": "rasp"})
