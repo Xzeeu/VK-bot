@@ -25,7 +25,7 @@ DZ_el = 't'
 
 
 for event in longpoll.listen():
-    
+
     aproftest(event)
 
     if event.type == VkBotEventType.MESSAGE_NEW:
