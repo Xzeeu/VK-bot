@@ -12,7 +12,7 @@ from edbot.settings import*
 from edbot.keyboard import*
 from edbot.maindef import *
 from edbot.test import *
-
+##
 
 for event in longpoll.listen():
 
