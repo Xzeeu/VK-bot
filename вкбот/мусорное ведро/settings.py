@@ -4,19 +4,16 @@ from vk_api.utils import get_random_id
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
-from boto.s3.connection import S3Connection
 import os
-
 
 from dotenv import load_dotenv
 load_dotenv()
 
-vk_session = vk_api.VkApi(token=S3Connection(os.environ['GROUP_TOKEN'], os.environ['GROUP_TOKEN']))
+vk_session = vk_api.VkApi(token=os.environ['GROUP_TOKEN'])
 
 
-GROUP_ID = S3Connection(os.environ['GROUP_ID'], os.environ['GROUP_ID'])
-
-GROUP_TOKEN = S3Connection(os.environ['GROUP_TOKEN'], os.environ['GROUP_TOKEN'])
+GROUP_ID = os.environ['GROUP_ID']
+GROUP_TOKEN = os.environ['GROUP_TOKEN']
 
 API_VERSION = '5.120'
 
