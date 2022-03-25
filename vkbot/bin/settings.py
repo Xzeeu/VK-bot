@@ -11,12 +11,12 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-vk_session = vk_api.VkApi(token=os.environ.get['GROUP_TOKEN'])
+vk_session = vk_api.VkApi(token=os.environ.get('GROUP_TOKEN'))
 
 
 GROUP_ID = '207758161'
 
-GROUP_TOKEN = os.environ.get['GROUP_TOKEN']
+GROUP_TOKEN = os.environ.get('GROUP_TOKEN')
 
 
 API_VERSION = '5.120'
