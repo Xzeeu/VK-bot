@@ -24,7 +24,7 @@ CALLBACK_TYPES = ('show_snackbar', 'open_link', 'open_app')
 
 vk_session = VkApi(token=GROUP_TOKEN, api_version=API_VERSION)
 vk_ = vk_session.get_api()
-longpoll = VkBotLongPoll(vk_session, group_id=GROUP_ID)
+longpoll = VkBotLongPoll(vk_session, group_id=S3Connection(os.environ['GROUP_ID'], os.environ['GROUP_ID']))
 
 
 
