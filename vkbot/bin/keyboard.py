@@ -5,7 +5,7 @@ from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 
 
-keyboard_1 = VkKeyboard(one_time=False)
+keyboard_1 = VkKeyboard(one_time=True)
 
 keyboard_1.add_callback_button(label='Куда поступать?', color=VkKeyboardColor.POSITIVE, payload={"type": "proftest"})
 keyboard_1.add_line()

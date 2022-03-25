@@ -29,7 +29,7 @@ for event in longpoll.listen():
                     print(f'Клиент {event.obj.message["from_id"]} не поддерж. callback')
         
                 new_m_send(event, keyboard_1.get_keyboard(), '👋Привет!) Я помогу тебе определиться с профессией, расскажу о том как поступить в университет и поделюсь списком полезных сайтов)\n Удачи в поступлении!👌 ')
-
+        
         
     elif event.type == VkBotEventType.MESSAGE_EVENT:
         if event.object.payload.get('type') in CALLBACK_TYPES:
