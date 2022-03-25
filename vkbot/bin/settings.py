@@ -9,11 +9,11 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-vk_session = vk_api.VkApi(token=os.environ['GROUP_TOKEN'])
+vk_session = vk_api.VkApi(token=process.env.GROUP_TOKEN)
 
 
-GROUP_ID = os.environ['GROUP_ID']
-GROUP_TOKEN = os.environ['GROUP_TOKEN']
+GROUP_ID = process.env.GROUP_ID
+GROUP_TOKEN = process.env.GROUP_TOKEN
 
 API_VERSION = '5.120'
 
