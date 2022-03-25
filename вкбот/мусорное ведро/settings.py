@@ -7,10 +7,10 @@ from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 import os
 
 
-vk_session = vk_api.VkApi(token=os.getenv('GROUP_TOKEN'))
+vk_session = vk_api.VkApi(token=process.env.GROUP_TOKEN)
 
-GROUP_ID = os.getenv('GROUP_ID')
-GROUP_TOKEN = os.getenv('GROUP_TOKEN')
+GROUP_ID = process.env.GROUP_ID
+GROUP_TOKEN = process.env.GROUP_TOKEN
 API_VERSION = '5.120'
 
 CALLBACK_TYPES = ('show_snackbar', 'open_link', 'open_app')
