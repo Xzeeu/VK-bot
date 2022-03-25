@@ -11,12 +11,12 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-vk_session = vk_api.VkApi(token=S3Connection(os.environ['GROUP_TOKEN']))
+vk_session = vk_api.VkApi(token=os.environ['GROUP_TOKEN'])
 
 
 GROUP_ID = '207758161'
 
-GROUP_TOKEN = boto.connect_s3(GROUP_TOKEN)
+GROUP_TOKEN = os.environ['GROUP_TOKEN']
 
 
 API_VERSION = '5.120'
