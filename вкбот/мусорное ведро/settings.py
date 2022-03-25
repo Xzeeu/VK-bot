@@ -9,10 +9,17 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+<<<<<<< HEAD:vkbot/bin/settings.py
 vk_session = vk_api.VkApi(token=os.getenv('GROUP_TOKEN'))
 
 GROUP_ID = os.getenv('GROUP_ID')
 GROUP_TOKEN = os.getenv('GROUP_TOKEN')
+=======
+vk_session = vk_api.VkApi(token=process.env.GROUP_TOKEN)
+
+GROUP_ID = process.env.GROUP_ID
+GROUP_TOKEN = process.env.GROUP_TOKEN
+>>>>>>> 726f314bf36e6a271172d6af72d3c2b5908a5bc3:вкбот/мусорное ведро/settings.py
 API_VERSION = '5.120'
 
 CALLBACK_TYPES = ('show_snackbar', 'open_link', 'open_app')
@@ -20,6 +27,7 @@ CALLBACK_TYPES = ('show_snackbar', 'open_link', 'open_app')
 vk_session = VkApi(token=GROUP_TOKEN, api_version=API_VERSION)
 vk_ = vk_session.get_api()
 longpoll = VkBotLongPoll(vk_session, group_id=GROUP_ID)
+<<<<<<< HEAD:vkbot/bin/settings.py
 
 
 
@@ -34,3 +42,5 @@ CALLBACK_TYPES = ('show_snackbar', 'open_link', 'open_app')
 vk_session = VkApi(token=GROUP_TOKEN, api_version=API_VERSION)
 vk_ = vk_session.get_api()
 longpoll = VkBotLongPoll(vk_session, group_id=GROUP_ID)'''
+=======
+>>>>>>> 726f314bf36e6a271172d6af72d3c2b5908a5bc3:вкбот/мусорное ведро/settings.py
