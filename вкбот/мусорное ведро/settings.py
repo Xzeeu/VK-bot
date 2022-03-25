@@ -9,7 +9,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-vk_session = vk_api.VkApi(token=os.environ['GROUP_TOKEN']
+vk_session = vk_api.VkApi(token=os.environ['GROUP_TOKEN'])
 
 
 GROUP_ID = os.environ['GROUP_ID']
