@@ -8,12 +8,10 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 
-from vkbot.bin.settings import*
-from vkbot.resources.timelessons import*
-from vkbot.bin.keyboard import*
-
-from vkbot.bin.maindef import *
-from vkbot.bin.test import *
+from edbot.settings import*
+from edbot.keyboard import*
+from edbot.maindef import *
+from edbot.test import *
 
 
 for event in longpoll.listen():

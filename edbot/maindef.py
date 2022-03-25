@@ -1,6 +1,6 @@
 import vk_api, vk
 from vk_api.utils import get_random_id
-from .settings import vk_
+from edbot.settings import vk_
 
 
 def new_m_send(event, keyboard, message):
