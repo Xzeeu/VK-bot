@@ -4,12 +4,13 @@ from vk_api.utils import get_random_id
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
+import os
 
 
-vk_session = vk_api.VkApi(token='17e23271daa238193862bc335ee78450a51ae018671bf72a97a32ee736d538041235deb025ae34c329ceb')
+vk_session = vk_api.VkApi(token=os.getenv('GROUP_TOKEN'))
 
-GROUP_ID = '207758161'
-GROUP_TOKEN = '17e23271daa238193862bc335ee78450a51ae018671bf72a97a32ee736d538041235deb025ae34c329ceb'
+GROUP_ID = os.getenv('GROUP_ID')
+GROUP_TOKEN = os.getenv('GROUP_TOKEN')
 API_VERSION = '5.120'
 
 CALLBACK_TYPES = ('show_snackbar', 'open_link', 'open_app')
